@@ -1,40 +1,48 @@
 {
-  "name": "iBroadcast-desktop",
-  "version": "1.0.0",
-  "description": "Election wrapper for iBroadcast web player",
+  "name": "iBroadcast",
+  "version": "1.1.0",
+  "description": "Election wrapper for iBroadcast Web player",
   "main": "./index.js",
   "scripts": {
+    "start": "electron .",
     "lint": "eslint --cache --ext .js .",
     "lint:fix": "eslint --fix --ext .js .",
     "prettier": "prettier --write '**/*.js'",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps",
-    "prepare": "husky install"
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "author": "Nicolas Martel",
+  "contributors": [
+    {
+      "name": "Joris Berthelot",
+      "email": "admin+github@eexit.net"
+    }
+  ],
   "license": "MIT",
   "build": {
-    "appId": "your.id",
+    "appId": "net.eexit.ibroadcast-desktop",
     "mac": {
-      "category": "your.app.category.type"
+      "category": "public.app-category.music"
     }
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^16.2.1",
-    "commitlint": "^16.2.1",
-    "electron": "^17.1.0",
-    "electron-builder": "^22.14.13",
+    "@commitlint/config-conventional": "^17.4.2",
+    "commitlint": "^17.4.2",
+    "electron": "^22.1.0",
+    "electron-builder": "^23.6.0",
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.4",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.5.1"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
+  },
+  "dependencies": {
+    "sharp": "^0.31.3"
   }
 }
