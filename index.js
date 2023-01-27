@@ -1,21 +1,33 @@
 /* eslint-disable-next-line import/no-extraneous-dependencies */
-const { BrowserWindow, Menu, Tray, app } = require('electron');
-const path = require('path');
+const { BrowserWindow, Menu, Tray, nativeImage, app } = require('electron');
+const sharp = require('sharp');
+const { promises } = require('fs');
+const { join } = require('path');
 
 // Set a variable when the app is quitting.
 let isQuiting = false;
-let win;
-let tray;
+let window, tray;
 
-app.on('ready', () => {
-  tray = new Tray(path.join(__dirname, 'icon.png'));
+// Loads the tray icon from a SVG file
+const loadTrayIcon = async () => {
+  const trayIcon = await promises.readFile(join(__dirname, 'assets/tray.svg'));
 
+  return await sharp(trayIcon).png().resize(18, 18).toBuffer();
+};
+
+// Don't show the app in the doc yet
+app.dock.hide();
+
+app.on('ready', async () => {
+  app.dock.show();
+
+  tray = new Tray(nativeImage.createFromBuffer(await loadTrayIcon()));
   tray.setContextMenu(
     Menu.buildFromTemplate([
       {
         label: 'Show App',
         click() {
-          win.show();
+          window.show();
         },
       },
       {
@@ -28,24 +40,43 @@ app.on('ready', () => {
     ])
   );
 
-  win = new BrowserWindow();
+  // We cannot require the screen module until the app is ready.
+  const { screen } = require('electron');
+
+  // Create a window that fills the screen's available work area.
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width, height } = primaryDisplay.workAreaSize;
+
+  window = new BrowserWindow({
+    // Only because I don't want the app to be maximized but
+    // still want it big enough to be comfortable using.
+    width: width - (width * 0.1),
+    height: height - 50,
+    center: true,
+    show: false,
+    darkTheme: true,
+  });
 
   // Load ibroadcast web player
-  win.loadURL('https://media.ibroadcast.com');
-  // Maximize window
-  win.maximize();
+  window.loadURL('https://media.ibroadcast.com');
+
+  // Display and focus the app once the URL has loaded
+  window.once('ready-to-show', () => {
+    window.show();
+    window.focus();
+  });
 
   // On close, minimize and don't quit
-  win.on('close', (evt) => {
+  window.on('close', (evt) => {
     if (!isQuiting) {
       evt.preventDefault();
-      win.hide();
+      window.hide();
     }
   });
 
-  win.on('minimize', (evt) => {
+  window.on('minimize', (evt) => {
     evt.preventDefault();
-    win.hide();
+    window.hide();
   });
 });
 
@@ -55,5 +86,5 @@ app.on('before-quit', () => {
 
 // Clicking on dock shows the application
 app.on('activate', () => {
-  win.show();
+  window.show();
 });
