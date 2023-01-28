@@ -12,11 +12,10 @@
     "app:dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
-  "author": "Nicolas Martel",
+  "author": "Joris Berthelot <admin+github@eexit.net>",
   "contributors": [
     {
-      "name": "Joris Berthelot",
-      "email": "admin+github@eexit.net"
+      "name": "Nicolas Martel"
     }
   ],
   "license": "MIT",
