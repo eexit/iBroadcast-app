@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "build": {
-    "appId": "net.eexit.ibroadcast-desktop",
+    "appId": "net.eexit.ibroadcast-app",
     "mac": {
       "category": "public.app-category.music"
     }

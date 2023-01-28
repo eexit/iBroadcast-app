@@ -1,28 +1,25 @@
-# iBroadcast-desktop
+# iBroadcast App
 
-Election wrapper for iBroadcast web player.
+Forked from <https://github.com/Nic128/iBroadcast-desktop>.
 
-[https://media.ibroadcast.com](https://media.ibroadcast.com)
+Electron wrapper for [iBroadcast web player](https://media.ibroadcast.com).
 
 ## Support
 
 - Mac ✅
 - Windows ✅
+- x64 & ARM64 ✅
 
-## Installation
+## Development
 
-### Prerequisites
-
-- Install [Node LTS](https://nodejs.org/en/download/)
-
-### Dependencies
-``` sh
-npm install
+```
+yarn && yarn start
 ```
 
-### Build
-``` sh
-npm run dist
+Build the app for your system:
+
+```
+yarn app:dist
 ```
 
 Binaries should be in the dist folder.
