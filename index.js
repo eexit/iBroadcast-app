@@ -1,12 +1,5 @@
 /* eslint-disable-next-line import/no-extraneous-dependencies */
-const {
-  BrowserWindow,
-  Menu,
-  Tray,
-  shell,
-  screen,
-  app,
-} = require('electron');
+const { BrowserWindow, Menu, Tray, shell, screen, app } = require('electron');
 const { join } = require('path');
 
 // Set a variable when the app is quitting.
