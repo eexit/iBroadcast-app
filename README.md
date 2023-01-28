@@ -1,5 +1,7 @@
 # iBroadcast App
 
+![screenshot](screenshot.jpeg)
+
 Forked from <https://github.com/Nic128/iBroadcast-desktop>.
 
 Electron wrapper for [iBroadcast web player](https://media.ibroadcast.com).
