@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 19
 
-      - name: Install modules
+      - name: Install dependencies
         run: yarn install
 
       - name: Run Lint
